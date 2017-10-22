@@ -15,15 +15,21 @@ import UserNotifications
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var category: UITextField!
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
+    
+    let myTask = Task()
+    
+    
     
     
     // DB内のタスクが格納されるリスト。
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される
-    var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
+   // var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
+    var taskArray = try! Realm().objects(Task.self).filter("myTask.category").sorted(byProperty: "date",ascending: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        myTask.category = self.category.text!
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
