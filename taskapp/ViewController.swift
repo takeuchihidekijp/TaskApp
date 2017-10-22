@@ -12,17 +12,32 @@ import UserNotifications
 
 
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var category: UITextField!
     
     @IBAction func categoryInput(_ sender: Any) {
-        self.taskArray = try! Realm().objects(Task.self).filter("category = 'myTask.category'").sorted(byProperty: "date",ascending: false)
+        
+        print(myTask.category)
+        
+        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
+        
+     //   self.taskArray = try! Realm().objects(Task.self).filter("category = 'myTask.category'").sorted(byProperty: "date",ascending: false)
         
         tableView.reloadData()
         
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        myTask.category = self.category.text!
+        
+        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
+        
+        tableView.reloadData()
+    }
+    
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
@@ -44,11 +59,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
+        category.delegate = self
+        self.view.addSubview(category)
+        
         myTask.category = self.category.text!
         
         
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -141,6 +160,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 入力画面から戻ってきた時に TableView を更新させる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        myTask.category = self.category.text!
+        
+        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
+        
         tableView.reloadData()
     }
     
