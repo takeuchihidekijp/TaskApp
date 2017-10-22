@@ -17,6 +17,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var category: UITextField!
     
+    @IBAction func categoryInput(_ sender: Any) {
+        self.taskArray = try! Realm().objects(Task.self).filter("category = 'myTask.category'").sorted(byProperty: "date",ascending: false)
+        
+        tableView.reloadData()
+        
+    }
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
@@ -28,8 +34,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // DB内のタスクが格納されるリスト。
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される
-   // var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
-    var taskArray = try! Realm().objects(Task.self).filter("myTask.category").sorted(byProperty: "date",ascending: false)
+    var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date",ascending: false)
+  //  var taskArray = try! Realm().objects(Task.self).filter("myTask.category").sorted(byProperty: "date",ascending: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
