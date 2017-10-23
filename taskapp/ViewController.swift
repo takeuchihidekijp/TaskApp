@@ -12,31 +12,20 @@ import UserNotifications
 
 
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var category: UITextField!
-    
-    @IBAction func categoryInput(_ sender: Any) {
-        
-        print(myTask.category)
-        
-        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
-        
-     //   self.taskArray = try! Realm().objects(Task.self).filter("category = 'myTask.category'").sorted(byProperty: "date",ascending: false)
-        
-        tableView.reloadData()
-        
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBAction func categoryInput2(_ sender: Any) {
         
         myTask.category = self.category.text!
         
         self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
         
         tableView.reloadData()
+        
     }
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var category: UITextField!
+    
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
@@ -59,7 +48,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-        category.delegate = self
         self.view.addSubview(category)
         
         myTask.category = self.category.text!

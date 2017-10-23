@@ -58,7 +58,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="categoryInput:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="ie7-yi-pzF"/>
+                                    <action selector="categoryInput2:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="DDV-T2-uuh"/>
                                 </connections>
                             </textField>
                         </subviews>
