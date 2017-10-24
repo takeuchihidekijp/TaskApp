@@ -144,14 +144,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //検索ボタン押下時の呼び出しメソッド
-    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         SearchBar.endEditing(true)
         
         myTask.category = self.SearchBar.text!
         
         print(myTask.category)
         
-        self.taskArray = try! Realm().objects(Task.self).filter("'\(myTask.category)'")
+        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
         
         tableView.reloadData()
         
