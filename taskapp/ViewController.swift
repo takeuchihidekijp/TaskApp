@@ -11,28 +11,19 @@ import RealmSwift
 import UserNotifications
 
 
-
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBAction func categoryInput2(_ sender: Any) {
-        
-        myTask.category = self.category.text!
-        
-        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
-        
-        tableView.reloadData()
-        
-    }
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var category: UITextField!
     
+    @IBOutlet weak var SearchBar: UISearchBar!
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
     let myTask = Task()
     
-    
+    var searchResults:[String] = []
     
     
     // DB内のタスクが格納されるリスト。
@@ -48,10 +39,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.view.addSubview(category)
+        SearchBar.delegate = self
         
-        myTask.category = self.category.text!
+        self.view.addSubview(tableView)
         
+        SearchBar.enablesReturnKeyAutomatically = false
         
     }
     
@@ -149,11 +141,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        myTask.category = self.category.text!
+        tableView.reloadData()
+    }
+    
+    //検索ボタン押下時の呼び出しメソッド
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        SearchBar.endEditing(true)
         
-        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
+        myTask.category = self.SearchBar.text!
+        
+        self.taskArray = try! Realm().objects(Task.self).filter("SearchBar = '\(myTask.category)'")
         
         tableView.reloadData()
+        
     }
     
     

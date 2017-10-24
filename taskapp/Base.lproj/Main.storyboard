@@ -52,25 +52,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-nc-B4a">
-                                <rect key="frame" x="0.0" y="10" width="375" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ngg-9m-NKk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="categoryInput2:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="DDV-T2-uuh"/>
-                                </connections>
-                            </textField>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rM5-5r-oZM" firstAttribute="top" secondItem="6gF-nc-B4a" secondAttribute="bottom" constant="10" id="BkJ-TC-pjI"/>
-                            <constraint firstAttribute="trailing" secondItem="6gF-nc-B4a" secondAttribute="trailing" id="G9U-d6-fXY"/>
-                            <constraint firstItem="6gF-nc-B4a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O07-5V-wHq"/>
-                            <constraint firstItem="rM5-5r-oZM" firstAttribute="leading" secondItem="6gF-nc-B4a" secondAttribute="leading" id="QTw-sA-cCW"/>
-                            <constraint firstItem="rM5-5r-oZM" firstAttribute="trailing" secondItem="6gF-nc-B4a" secondAttribute="trailing" id="QrE-Kh-HvS"/>
+                            <constraint firstItem="rM5-5r-oZM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="1n9-VC-6WK"/>
+                            <constraint firstAttribute="trailing" secondItem="rM5-5r-oZM" secondAttribute="trailing" id="4fP-JK-o9o"/>
+                            <constraint firstItem="rM5-5r-oZM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A0f-6s-IZG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rM5-5r-oZM" secondAttribute="bottom" id="TcX-pb-i4I"/>
-                            <constraint firstItem="6gF-nc-B4a" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="plL-Fb-oCZ"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -82,7 +75,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="category" destination="6gF-nc-B4a" id="rOD-y6-gFX"/>
+                        <outlet property="SearchBar" destination="Ngg-9m-NKk" id="JXI-kU-j0i"/>
                         <outlet property="tableView" destination="rM5-5r-oZM" id="eN6-bN-oZq"/>
                         <segue destination="wGp-uK-DSQ" kind="show" identifier="cellSegue" id="ZfA-sG-bA9"/>
                     </connections>
