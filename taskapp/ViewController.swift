@@ -14,7 +14,6 @@ import UserNotifications
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var category: UITextField!
     
     @IBOutlet weak var SearchBar: UISearchBar!
     
@@ -150,7 +149,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         myTask.category = self.SearchBar.text!
         
-        self.taskArray = try! Realm().objects(Task.self).filter("SearchBar = '\(myTask.category)'")
+        print(myTask.category)
+        
+        self.taskArray = try! Realm().objects(Task.self).filter("'\(myTask.category)'")
         
         tableView.reloadData()
         
