@@ -147,13 +147,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         SearchBar.endEditing(true)
         
-        myTask.category = self.SearchBar.text!
+        if(self.SearchBar.text != ""){
+            
+            myTask.category = self.SearchBar.text!
+            
+            print(myTask.category)
+            
+            self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
+            
+            tableView.reloadData()
+        }else{
+            
+            self.taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
+            
+            tableView.reloadData()
+        }
         
-        print(myTask.category)
-        
-        self.taskArray = try! Realm().objects(Task.self).filter("category = '\(myTask.category)'")
-        
-        tableView.reloadData()
         
     }
     
