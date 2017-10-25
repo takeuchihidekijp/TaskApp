@@ -157,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             tableView.reloadData()
         }else{
-            
+            //検索欄が空欄なら全件出力させる
             self.taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
             
             tableView.reloadData()
